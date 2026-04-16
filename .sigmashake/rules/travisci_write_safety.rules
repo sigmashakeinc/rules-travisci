@@ -6,7 +6,7 @@ rule travisci-block-unsafe-patterns {
   priority 90
   severity error
   DENY write
-  IF path GLOB "**/*" AND content CONTAINS "UNSAFE_travisci_PATTERN"
+  IF path GLOB "**/*" AND content CONTAINS "sudo: required"
   MESSAGE "Blocked an unsafe pattern in travisci. Use the recommended best practices for 2025/2026."
 }
 
@@ -14,7 +14,7 @@ rule travisci-force-updated-api {
   enabled true
   priority 80
   severity warning
-  ASK write
-  IF path GLOB "**/*" AND content CONTAINS "OLD_travisci_API"
+  LOG write
+  IF path GLOB "**/*" AND content CONTAINS "travis_retry"
   MESSAGE "You are using an outdated API for travisci. Please upgrade to the newer API."
 }
